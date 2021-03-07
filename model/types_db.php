@@ -25,4 +25,3 @@
         $type_name = $type['type'];
         return $type_name;
     }
-    
