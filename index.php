@@ -21,20 +21,23 @@
     if (!$action) {
         $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
         if (!$action) {
-            $action = 'list_vehicles';
+            $action = 'list_vehicles_by_price';
         }
     }
 
     switch($action) {
-        case "list_vehicles":
-            $vehicles = get_vehicles();
+        case "list_vehicles_by_price":
+            $vehicles = get_vehicles_by_price();
             include('view/vehicle_list.php');
             break;
-
+        case "list_vehicles_by_year":
+            $vehicles = get_vehicles_by_year();
+            include('view/vehicle_list.php');
+            break;
         
         default:
-            $vehicle_name = get_vehicle_name($vehicle_id);
-            $vehicles = get_vehicles();
-            $items = get_items_by_vehicle($vehicle_id);
+            $vehicles = get_vehicles_by_price();
+            $items = get_vehicles_by_price($vehicle_id);
             include('view/vehicle_list.php');
     }
+    

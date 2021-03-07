@@ -1,10 +1,10 @@
 <?php
 
-    // Returns all vehicles
-    function get_vehicles() {
+    // Returns all vehicles and sorts by price
+    function get_vehicles_by_price() {
         global $db;
         $query = 'SELECT * FROM vehicles
-                  ORDER BY vehicleID';
+                  ORDER BY price DESC';
         $statement = $db->prepare($query);
         $statement->execute();
         $vehicles = $statement->fetchAll();
@@ -12,19 +12,14 @@
         return $vehicles;
     }
 
-    // Gets vehicle name
-    function get_vehicle_name($vehicle_id) {
-        if (!$vehicle_id) {
-            return "All vehicles";
-        }
+    // Returns all vehicles and sorts by year
+    function get_vehicles_by_year() {
         global $db;
         $query = 'SELECT * FROM vehicles
-                  WHERE vehicleID = :vehicle_id';
+                  ORDER BY year DESC';
         $statement = $db->prepare($query);
-        $statement->bindValue(':vehicle_id', $vehicle_id);
         $statement->execute();
-        $vehicle = $statement->fetch();
+        $vehicles = $statement->fetchAll();
         $statement->closeCursor();
-        $vehicle_name = $vehicle['vehicleName'];
-        return $vehicle_name;
+        return $vehicles;
     }
